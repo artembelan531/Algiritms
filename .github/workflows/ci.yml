@@ -18,10 +18,13 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y g++ make cmake libgtest-dev
-        cd /usr/src/gtest
-        sudo cmake CMakeLists.txt
-        sudo make
-        sudo cp *.a /usr/lib
+
+    - name: Build GoogleTest
+      run: |
+        cd /usr/src/googletest
+        sudo cmake -S . -B build
+        sudo cmake --build build
+        sudo cp build/lib/*.a /usr/lib
 
     - name: Build project
       run: make
